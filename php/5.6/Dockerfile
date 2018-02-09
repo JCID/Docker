@@ -2,7 +2,7 @@ FROM php:5.6
 
 # Container uitbreidingen (nodig voor composer)
 RUN apt-get clean && apt-get update -qq
-RUN apt-get install -y -qq unzip git zlib1g-dev locales zlib1g-dev libicu-dev g++
+RUN apt-get install -y -qq unzip git zlib1g-dev locales zlib1g-dev libicu-dev g++ libxml2-dev
 RUN rm -rf /var/lib/apt/lists/*
 
 # Install dutch locale
@@ -12,8 +12,9 @@ RUN locale-gen
 
 # PHP uitbreidingen
 RUN docker-php-ext-install bcmath
-RUN docker-php-ext-install zip
 RUN docker-php-ext-install calendar
+RUN docker-php-ext-install soap
+RUN docker-php-ext-install zip
 RUN docker-php-ext-configure intl && docker-php-ext-install intl
 RUN pecl install xdebug && docker-php-ext-enable xdebug
 RUN echo "date.timezone = Europe/Amsterdam" > /usr/local/etc/php/conf.d/timezone.ini
@@ -25,6 +26,6 @@ RUN php composer-setup.php --install-dir=/usr/local/bin/ --filename=composer
 RUN php -r "unlink('composer-setup.php');"
 
 # Installatie afhankelijkheden
-RUN composer global require "hirak/prestissimo:^0.3"
+RUN composer global require hirak/prestissimo
 
 CMD ["php", "-a"]
