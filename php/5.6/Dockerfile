@@ -16,7 +16,7 @@ RUN docker-php-ext-install calendar
 RUN docker-php-ext-install soap
 RUN docker-php-ext-install zip
 RUN docker-php-ext-configure intl && docker-php-ext-install intl
-RUN pecl install xdebug && docker-php-ext-enable xdebug
+RUN pecl install xdebug-2.5.5 && docker-php-ext-enable xdebug
 RUN echo "date.timezone = Europe/Amsterdam" > /usr/local/etc/php/conf.d/timezone.ini
 RUN echo "short_open_tag = off" > /usr/local/etc/php/conf.d/short_open.ini
 
