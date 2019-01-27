@@ -1,29 +1,43 @@
 FROM php:5.6
 
-# Container uitbreidingen (nodig voor composer)
-RUN apt-get clean && apt-get update -qq
-RUN apt-get install -y -qq unzip git zlib1g-dev locales zlib1g-dev libicu-dev g++ libxml2-dev
-RUN rm -rf /var/lib/apt/lists/*
+## Container uitbreidingen (nodig voor composer)
+RUN apt-get clean && \
+    apt-get update -qq && \
+    apt-get install -y -qq \
+        g++ \
+        git \
+        imagemagick \
+        libicu-dev \
+        libmagickwand-dev \
+        libxml2-dev \
+        locales \
+        unzip \
+        zlib1g-dev \
+        zlib1g-dev && \
+    rm -rf /var/lib/apt/lists/*
 
-# Install dutch locale
-RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
-RUN echo "nl_NL.UTF-8 UTF-8" >> /etc/locale.gen
-RUN locale-gen
+## Install dutch locale
+RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen && \
+    echo "nl_NL.UTF-8 UTF-8" >> /etc/locale.gen && \
+    locale-gen
 
-# PHP uitbreidingen
-RUN docker-php-ext-install bcmath
-RUN docker-php-ext-install calendar
-RUN docker-php-ext-install soap
-RUN docker-php-ext-install zip
-RUN docker-php-ext-configure intl && docker-php-ext-install intl
-RUN pecl install xdebug-2.5.5 && docker-php-ext-enable xdebug
-RUN echo "date.timezone = Europe/Amsterdam" > /usr/local/etc/php/conf.d/timezone.ini
-RUN echo "short_open_tag = off" > /usr/local/etc/php/conf.d/short_open.ini
+# PHP Extensies toevoegen
+RUN docker-php-ext-install bcmath && \
+    docker-php-ext-install calendar && \
+    docker-php-ext-install soap && \
+    docker-php-ext-install zip && \
+    docker-php-ext-configure intl && docker-php-ext-install intl && \
+    pecl install imagick && docker-php-ext-enable imagick && \
+    pecl install xdebug-2.5.5 && docker-php-ext-enable xdebug
+
+# Ini configuraties
+RUN echo "date.timezone = Europe/Amsterdam" > /usr/local/etc/php/conf.d/timezone.ini && \
+    echo "short_open_tag = off" > /usr/local/etc/php/conf.d/short_open.ini
 
 # Installatie composer
-RUN php -r "readfile('https://getcomposer.org/installer');" > composer-setup.php
-RUN php composer-setup.php --install-dir=/usr/local/bin/ --filename=composer
-RUN php -r "unlink('composer-setup.php');"
+RUN php -r "readfile('https://getcomposer.org/installer');" > composer-setup.php && \
+    php composer-setup.php --install-dir=/usr/local/bin/ --filename=composer && \
+    php -r "unlink('composer-setup.php');"
 
 # Installatie afhankelijkheden
 RUN composer global require hirak/prestissimo
