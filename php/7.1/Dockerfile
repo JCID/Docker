@@ -12,7 +12,6 @@ RUN apt-get clean && \
         libxml2-dev \
         locales \
         unzip \
-        zlib1g-dev \
         zlib1g-dev && \
     rm -rf /var/lib/apt/lists/*
 
