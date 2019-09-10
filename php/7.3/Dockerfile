@@ -28,7 +28,6 @@ RUN docker-php-ext-install bcmath && \
     docker-php-ext-install zip && \
     docker-php-ext-configure intl && docker-php-ext-install intl && \
     pecl install imagick && docker-php-ext-enable imagick
-#    pecl install xdebug && docker-php-ext-enable xdebug
 
 # Ini configuraties
 RUN echo "date.timezone = Europe/Amsterdam" > /usr/local/etc/php/conf.d/timezone.ini && \
