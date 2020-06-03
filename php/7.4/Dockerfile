@@ -12,6 +12,7 @@ RUN apt-get clean && \
         libxml2-dev \
         libzip-dev \
         locales \
+        openssh-client \
         rsync \
         unzip \
         zlib1g-dev && \

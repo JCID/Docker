@@ -11,6 +11,7 @@ RUN apt-get clean && \
         libmagickwand-dev \
         libxml2-dev \
         locales \
+        openssh-client \
         rsync \
         unzip \
         zlib1g-dev && \

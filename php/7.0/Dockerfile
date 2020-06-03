@@ -11,6 +11,7 @@ RUN apt-get clean && \
         libmagickwand-dev \
         libxml2-dev \
         locales \
+        openssh-client \
         unzip \
         zlib1g-dev && \
     rm -rf /var/lib/apt/lists/*
