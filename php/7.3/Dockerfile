@@ -28,6 +28,7 @@ RUN docker-php-ext-install bcmath && \
     docker-php-ext-install calendar && \
     docker-php-ext-install soap && \
     docker-php-ext-install zip && \
+    docker-php-ext-install sockets && \
     docker-php-ext-configure intl && docker-php-ext-install intl && \
     pecl install imagick && docker-php-ext-enable imagick && \
     pecl install pcov && docker-php-ext-enable pcov
