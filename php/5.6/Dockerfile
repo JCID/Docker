@@ -26,6 +26,7 @@ RUN docker-php-ext-install bcmath && \
     docker-php-ext-install calendar && \
     docker-php-ext-install soap && \
     docker-php-ext-install zip && \
+    docker-php-ext-install pdo pdo_mysql && \
     docker-php-ext-configure intl && docker-php-ext-install intl && \
     pecl install imagick && docker-php-ext-enable imagick && \
     pecl install xdebug-2.5.5 && docker-php-ext-enable xdebug
