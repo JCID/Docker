@@ -39,7 +39,7 @@ RUN echo "date.timezone = Europe/Amsterdam" > /usr/local/etc/php/conf.d/timezone
 
 # Installatie composer
 RUN php -r "readfile('https://getcomposer.org/installer');" > composer-setup.php && \
-    php composer-setup.php --install-dir=/usr/local/bin/ --filename=composer && \
+    php composer-setup.php --1 --install-dir=/usr/local/bin/ --filename=composer && \
     php -r "unlink('composer-setup.php');"
 
 # Installatie afhankelijkheden
