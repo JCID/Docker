@@ -39,6 +39,4 @@ RUN php -r "readfile('https://getcomposer.org/installer');" > composer-setup.php
     ln -s /usr/local/bin/composer1 /usr/local/bin/composer && \
     php -r "unlink('composer-setup.php');"
 
-RUN composer global require hirak/prestissimo
-
 CMD ["php", "-a"]
