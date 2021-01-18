@@ -39,4 +39,7 @@ RUN php -r "readfile('https://getcomposer.org/installer');" > composer-setup.php
     ln -s /usr/local/bin/composer1 /usr/local/bin/composer && \
     php -r "unlink('composer-setup.php');"
 
+RUN curl -sS https://get.symfony.com/cli/installer | bash && \
+    mv /root/.symfony/bin/symfony /usr/local/bin/symfony
+
 CMD ["php", "-a"]
