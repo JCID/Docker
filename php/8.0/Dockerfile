@@ -33,8 +33,10 @@ RUN docker-php-ext-install bcmath && \
 RUN echo 'date.timezone = Europe/Amsterdam' > /usr/local/etc/php/conf.d/timezone.ini && \
     echo 'short_open_tag = off' > /usr/local/etc/php/conf.d/short_open.ini
 
-RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
-    php composer-setup.php --2 --install-dir=/usr/local/bin/ --filename=composer && \
+RUN php -r "readfile('https://getcomposer.org/installer');" > composer-setup.php && \
+    php composer-setup.php --1 --install-dir=/usr/local/bin/ --filename=composer1 && \
+    php composer-setup.php --2 --install-dir=/usr/local/bin/ --filename=composer2 && \
+    ln -s /usr/local/bin/composer1 /usr/local/bin/composer && \
     php -r "unlink('composer-setup.php');"
 
 CMD ['php', '-a']
