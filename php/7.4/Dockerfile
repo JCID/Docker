@@ -35,9 +35,7 @@ RUN echo "date.timezone = Europe/Amsterdam" > /usr/local/etc/php/conf.d/timezone
     echo "short_open_tag = off" > /usr/local/etc/php/conf.d/short_open.ini
 
 RUN php -r "readfile('https://getcomposer.org/installer');" > composer-setup.php && \
-    php composer-setup.php --1 --install-dir=/usr/local/bin/ --filename=composer1 && \
-    php composer-setup.php --2 --install-dir=/usr/local/bin/ --filename=composer2 && \
-    ln -s /usr/local/bin/composer1 /usr/local/bin/composer && \
+    php composer-setup.php --2 --install-dir=/usr/local/bin/ --filename=composer && \
     php -r "unlink('composer-setup.php');"
 
 RUN curl -sS https://get.symfony.com/cli/installer | bash && \
